@@ -1,0 +1,26 @@
+{
+  "name": "onready-challenge",
+  "version": "1.0.0",
+  "description": "onready nodejs challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AChareun/onready-challenge.git"
+  },
+  "author": "Alonso Chareun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AChareun/onready-challenge/issues"
+  },
+  "homepage": "https://github.com/AChareun/onready-challenge#readme",
+  "devDependencies": {
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "jsdoc": "~3.6.5"
+  }
+}
