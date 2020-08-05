@@ -1,12 +1,15 @@
-const StockTaker = require('./module/stocktaking/service/stockTake');
-const StockLogger = require('./module/stocktaking/service/logger');
+const StockRetriever = require('./module/stocktaking/service/StockRetriever');
+const StockLogger = require('./module/stocktaking/service/StockLogger');
+const LogBuilder = require('./module/stocktaking/service/LogBuilder');
+const logMethods = require('./module/stocktaking/service/logMethods');
 const vehicleData = require('../data/vehicles.db.json');
 
-function getStock(dbData) {
-  const newStocker = new StockTaker(dbData);
-  const newLogger = new StockLogger(newStocker.itemList);
+function getStock(dbData, maxToMin, charToFind, requests) {
+  const newLogger = new StockLogger(
+    StockRetriever, LogBuilder, dbData, maxToMin, charToFind, requests,
+  );
 
-  newLogger.logStock();
+  newLogger.logData();
 }
 
-getStock(vehicleData);
+getStock(vehicleData, true, 'Y', logMethods);
