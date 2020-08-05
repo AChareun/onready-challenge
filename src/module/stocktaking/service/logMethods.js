@@ -7,9 +7,14 @@ function formatData() {
     const itemInArray = [];
     Object.entries(item).forEach(([key, value]) => {
       const capitalKey = key.replace(/^\w/, (c) => c.toUpperCase());
-      const newItem = [capitalKey, value].join(': ');
+      const fixedValue = key === 'precio' ? `$${value}` : value;
+      const newItem = [capitalKey, fixedValue].join(': ');
       itemInArray.push(newItem);
     });
+
+    const priceIndex = itemInArray.findIndex((elem) => elem.includes('Precio'));
+    itemInArray.push(itemInArray.splice(priceIndex, 1)[0]);
+
     const joinedItem = itemInArray.join(' // ');
     resultArray.push(joinedItem);
   });
