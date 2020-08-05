@@ -40,7 +40,10 @@ Vehículo más barato: ${cheapestVehicle[0].marca} ${cheapestVehicle[0].modelo}\
  * @returns {string} Vehicle's with model including this.char
  */
 function findModelWithChar() {
-  const matchingVehicles = this.data.filter((item) => item.modelo.includes(this.char));
+  // eslint-disable-next-line arrow-body-style
+  const matchingVehicles = this.data.filter((item) => {
+    return item.modelo.toLowerCase().includes(this.char.toLowerCase());
+  });
   if (matchingVehicles.length === 0) {
     return `No se encontró modelo con la letra ${this.char}\n`;
   }
@@ -61,8 +64,10 @@ function findModelWithChar() {
 function orderByValue() {
   if (this.maxToMin) {
     let result = 'Vehículos ordenados por precio de mayor a menor:\n';
-    // eslint-disable-next-line max-len
-    const vehiclesByValue = this.data.sort((a, b) => parseInt(b.precio, 10) - parseInt(a.precio, 10));
+    // eslint-disable-next-line arrow-body-style
+    const vehiclesByValue = this.data.sort((a, b) => {
+      return parseInt(b.precio, 10) - parseInt(a.precio, 10);
+    });
     vehiclesByValue.forEach((item) => {
       result += `${item.marca} ${item.modelo}\n`;
     });

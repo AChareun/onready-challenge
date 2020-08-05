@@ -3,6 +3,14 @@ const mapMoto = require('../mapper/motoMapper');
 
 module.exports = class StockRetriever {
   /**
+   * @param {JSON} data
+   */
+  constructor(data) {
+    this.data = data;
+    this.itemList = this.mapData();
+  }
+
+  /**
    * @returns {Array.<import('../entities/auto') | import('../entities/moto')>}
    */
   mapData() {
@@ -25,13 +33,5 @@ module.exports = class StockRetriever {
    */
   getStock() {
     return this.itemList;
-  }
-
-  /**
-   * @param {JSON} data
-   */
-  constructor(data) {
-    this.data = data;
-    this.itemList = this.mapData();
   }
 };
