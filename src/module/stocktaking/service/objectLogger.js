@@ -7,9 +7,9 @@ module.exports = class ObjectLogger {
   logObjects(objectList) {
     objectList.forEach((object) => {
       let log = '';
-      Object.entries(object).forEach(([key, value]) => {
+      Object.entries(object).forEach(([key, value], i, arr) => {
         const capitalKey = key.replace(/^\w/, (c) => c.toUpperCase());
-        log += `${capitalKey}: ${value} // `;
+        log += i !== arr.length - 1 ? `${capitalKey}: ${value} // ` : `${capitalKey}: ${value}`;
       });
       console.log(log);
     });

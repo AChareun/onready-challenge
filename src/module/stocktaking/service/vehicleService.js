@@ -87,15 +87,18 @@ module.exports = class VehicleService {
    */
   getSortedByValue(ascending) {
     if (!ascending) {
-      // eslint-disable-next-line arrow-body-style
       const vehiclesByValue = this.vehicleList.sort((a, b) => {
-        return parseInt(b.precio, 10) - parseInt(a.precio, 10);
+        const priceA = a.precio.split('').splice(1).join('');
+        const priceB = b.precio.split('').splice(1).join('');
+        return parseInt(priceB, 10) - parseInt(priceA, 10);
       });
       return vehiclesByValue;
     }
-    // eslint-disable-next-line arrow-body-style
+
     const vehiclesByValue = this.vehicleList.sort((a, b) => {
-      return parseInt(a.precio, 10) - parseInt(b.precio, 10);
+      const priceA = a.precio.split('').splice(1).join('');
+      const priceB = b.precio.split('').splice(1).join('');
+      return parseInt(priceA, 10) - parseInt(priceB, 10);
     });
     return vehiclesByValue;
   }
