@@ -6,7 +6,7 @@
     "caracteristicas": {
       "puertas": 4
     },
-    "precio": "200.000,00"
+    "precio": "$200.000,00"
   },
   {
     "tipo": "moto",
@@ -15,7 +15,7 @@
     "caracteristicas": {
       "cilindrada": "125c"
     },
-    "precio": "60.000,00"
+    "precio": "$60.000,00"
   },
   {
     "tipo": "auto",
@@ -24,7 +24,7 @@
     "caracteristicas": {
       "puertas": 5
     },
-    "precio": "250.000,00"
+    "precio": "$250.000,00"
   },
   {
     "tipo": "moto",
@@ -33,6 +33,6 @@
     "caracteristicas": {
       "cilindrada": "160c"
     },
-    "precio": "80.500,50"
+    "precio": "$80.500,50"
   }
 ]

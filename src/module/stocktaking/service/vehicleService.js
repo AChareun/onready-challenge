@@ -29,9 +29,7 @@ module.exports = class VehicleService {
    * @returns {Array.<import('../entities/auto') | import('../entities/moto')>}
    */
   getAll() {
-    if (!this.vehicleList) {
-      throw new Error('La lista de vehículos no fue creada');
-    }
+    this.mapData();
     return this.vehicleList;
   }
 
@@ -39,28 +37,34 @@ module.exports = class VehicleService {
    * @returns {Array.<import('../entities/auto') | import('../entities/moto')>}
    */
   getMostExpensiveVehicle() {
-    const prices = this.vehicleList.map((item) => parseInt(item.precio, 10));
+    const prices = this.vehicleList.map((item) => {
+      const price = item.precio.split('').splice(1).join('');
+      return parseInt(price, 10);
+    });
     const maxValue = Math.max(...prices);
-    // eslint-disable-next-line arrow-body-style
     const mostExpensiveVehicle = this.vehicleList.filter((item) => {
-      return parseInt(item.precio, 10) === maxValue;
+      const price = item.precio.split('').splice(1).join('');
+      return parseInt(price, 10) === maxValue;
     });
 
-    return mostExpensiveVehicle;
+    return mostExpensiveVehicle[0];
   }
 
   /**
    * @returns {Array.<import('../entities/auto') | import('../entities/moto')>}
    */
   getCheapestVehicle() {
-    const prices = this.vehicleList.map((item) => parseInt(item.precio, 10));
+    const prices = this.vehicleList.map((item) => {
+      const price = item.precio.split('').splice(1).join('');
+      return parseInt(price, 10);
+    });
     const minValue = Math.min(...prices);
-    // eslint-disable-next-line arrow-body-style
     const cheapestVehicle = this.vehicleList.filter((item) => {
-      return parseInt(item.precio, 10) === minValue;
+      const price = item.precio.split('').splice(1).join('');
+      return parseInt(price, 10) === minValue;
     });
 
-    return cheapestVehicle;
+    return cheapestVehicle[0];
   }
 
   /**
@@ -68,13 +72,13 @@ module.exports = class VehicleService {
    */
   getWithModelY() {
     // eslint-disable-next-line arrow-body-style
-    const matchingVehicles = this.vehicleList.filter((item) => {
+    const matchingVehicle = this.vehicleList.filter((item) => {
       return item.modelo.toLowerCase().includes('y');
     });
-    if (matchingVehicles.length === 0) {
+    if (matchingVehicle.length === 0) {
       throw new Error("No se encontró vehículo cuyo modelo contenga 'Y'");
     }
-    return matchingVehicles;
+    return matchingVehicle[0];
   }
 
   /**
