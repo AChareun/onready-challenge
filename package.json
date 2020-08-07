@@ -4,8 +4,9 @@
   "description": "onready nodejs challenge",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "test": "jest --collect-coverage",
+    "test:dev": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,8 @@
     "eslint": "^7.6.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
+    "@types/jest": "^26.0.9",
+    "eslint-plugin-jest": "^23.20.0",
     "jest": "^26.2.2",
     "jsdoc": "~3.6.5"
   }

@@ -2,6 +2,10 @@ const VehicleService = require('./module/vehicle/service/vehicleService');
 const ObjectLogger = require('./module/logger/service/objectLogger');
 const vehicleData = require('../data/vehicles.db.json');
 
+/**
+ * @param {JSON} dbData
+ * @function orchestrates modules
+ */
 function logData(dbData) {
   const vehicleService = new VehicleService(dbData);
   const vehicleLogger = new ObjectLogger();
@@ -28,3 +32,5 @@ function logData(dbData) {
 }
 
 logData(vehicleData);
+
+module.exports = logData;

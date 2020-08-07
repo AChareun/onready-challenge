@@ -10,6 +10,11 @@ function priceToInt(price) {
   return parseInt(no$String, 10);
 }
 
+/**
+ * @typedef {import('../entity/car'} Car
+ * @typedef {import('../entity/motorbike')} Motorbike
+ */
+
 module.exports = class VehicleService {
   /**
    * @param {JSON} data - raw JSON from the data
@@ -35,7 +40,7 @@ module.exports = class VehicleService {
   }
 
   /**
-   * @returns {Array.<import('../entity/car') | import('../entity/motorbike')>}
+   * @returns {Array.< Car | Motorbike )>}
    */
   getAll() {
     this.mapData();
@@ -43,7 +48,7 @@ module.exports = class VehicleService {
   }
 
   /**
-   * @returns {import('../entity/car') | import('../entity/motorbike')}
+   * @returns { Car | Motorbike }
    */
   getMostExpensiveVehicle() {
     const prices = this.vehicleList.map((item) => priceToInt(item.precio));
@@ -56,7 +61,7 @@ module.exports = class VehicleService {
   }
 
   /**
-   * @returns {import('../entity/car') | import('../entity/motorbike')}
+   * @returns { Car | Motorbike }
    */
   getCheapestVehicle() {
     const prices = this.vehicleList.map((item) => priceToInt(item.precio));
@@ -70,7 +75,7 @@ module.exports = class VehicleService {
   }
 
   /**
-   * @returns {import('../entity/car') | import('../entity/motorbike') | string}
+   * @returns { Car | Motorbike | Error}
    */
   getWithModelY() {
     // eslint-disable-next-line arrow-body-style
@@ -85,7 +90,7 @@ module.exports = class VehicleService {
 
   /**
    * @param {boolean} ascending - Determines if sorting is ascending or descending
-   * @returns {Array.<import('../entity/car') | import('../entity/motorbike')>} Sorted by value
+   * @returns {Array.< Car | Motorbike )>} Sorted by value
    */
   getSortedByValue(ascending) {
     if (!ascending) {

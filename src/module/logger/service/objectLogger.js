@@ -23,7 +23,7 @@ module.exports = class ObjectLogger {
     let log = '';
     log += title;
     values.forEach((value) => {
-      log += ` ${value}`;
+      log += value[0] === '$' ? ` \\${value}` : ` ${value}`;
     });
 
     console.log(log);
