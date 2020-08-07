@@ -1,5 +1,14 @@
-const mapAuto = require('../mapper/autoMapper');
-const mapMoto = require('../mapper/motoMapper');
+const mapCar = require('../mapper/carMapper');
+const mapMotorbike = require('../mapper/motorbikeMapper');
+
+/**
+ * @param {string} price
+ * @returns {number}
+ */
+function priceToInt(price) {
+  const no$String = price.split('').splice(1).join('');
+  return parseInt(no$String, 10);
+}
 
 module.exports = class VehicleService {
   /**
@@ -15,10 +24,10 @@ module.exports = class VehicleService {
   mapData() {
     this.vehicleList = this.data.map((item) => {
       if (item.tipo === 'auto') {
-        return mapAuto(item);
+        return mapCar(item);
       }
       if (item.tipo === 'moto') {
-        return mapMoto(item);
+        return mapMotorbike(item);
       }
 
       return null;
@@ -26,7 +35,7 @@ module.exports = class VehicleService {
   }
 
   /**
-   * @returns {Array.<import('../entities/auto') | import('../entities/moto')>}
+   * @returns {Array.<import('../entity/car') | import('../entity/motorbike')>}
    */
   getAll() {
     this.mapData();
@@ -34,41 +43,34 @@ module.exports = class VehicleService {
   }
 
   /**
-   * @returns {Array.<import('../entities/auto') | import('../entities/moto')>}
+   * @returns {import('../entity/car') | import('../entity/motorbike')}
    */
   getMostExpensiveVehicle() {
-    const prices = this.vehicleList.map((item) => {
-      const price = item.precio.split('').splice(1).join('');
-      return parseInt(price, 10);
-    });
+    const prices = this.vehicleList.map((item) => priceToInt(item.precio));
     const maxValue = Math.max(...prices);
     const mostExpensiveVehicle = this.vehicleList.filter((item) => {
-      const price = item.precio.split('').splice(1).join('');
-      return parseInt(price, 10) === maxValue;
+      const price = priceToInt(item.precio);
+      return price === maxValue;
     });
-
     return mostExpensiveVehicle[0];
   }
 
   /**
-   * @returns {Array.<import('../entities/auto') | import('../entities/moto')>}
+   * @returns {import('../entity/car') | import('../entity/motorbike')}
    */
   getCheapestVehicle() {
-    const prices = this.vehicleList.map((item) => {
-      const price = item.precio.split('').splice(1).join('');
-      return parseInt(price, 10);
-    });
+    const prices = this.vehicleList.map((item) => priceToInt(item.precio));
     const minValue = Math.min(...prices);
     const cheapestVehicle = this.vehicleList.filter((item) => {
-      const price = item.precio.split('').splice(1).join('');
-      return parseInt(price, 10) === minValue;
+      const price = priceToInt(item.precio);
+      return price === minValue;
     });
 
     return cheapestVehicle[0];
   }
 
   /**
-   * @returns {Array.<import('../entities/auto') | import('../entities/moto')>}
+   * @returns {import('../entity/car') | import('../entity/motorbike') | string}
    */
   getWithModelY() {
     // eslint-disable-next-line arrow-body-style
@@ -83,22 +85,22 @@ module.exports = class VehicleService {
 
   /**
    * @param {boolean} ascending - Determines if sorting is ascending or descending
-   * @returns {Array.<import('../entities/auto') | import('../entities/moto')>} Sorted by value
+   * @returns {Array.<import('../entity/car') | import('../entity/motorbike')>} Sorted by value
    */
   getSortedByValue(ascending) {
     if (!ascending) {
       const vehiclesByValue = this.vehicleList.sort((a, b) => {
-        const priceA = a.precio.split('').splice(1).join('');
-        const priceB = b.precio.split('').splice(1).join('');
-        return parseInt(priceB, 10) - parseInt(priceA, 10);
+        const priceA = priceToInt(a.precio);
+        const priceB = priceToInt(b.precio);
+        return priceB - priceA;
       });
       return vehiclesByValue;
     }
 
     const vehiclesByValue = this.vehicleList.sort((a, b) => {
-      const priceA = a.precio.split('').splice(1).join('');
-      const priceB = b.precio.split('').splice(1).join('');
-      return parseInt(priceA, 10) - parseInt(priceB, 10);
+      const priceA = priceToInt(a.precio);
+      const priceB = priceToInt(b.precio);
+      return priceA - priceB;
     });
     return vehiclesByValue;
   }
